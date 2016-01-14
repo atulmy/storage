@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>AngularJS - Data Binding - Pure JS</title>
+    </head>
+    
+    <body>
+        <h2>AngularJS - Data Binding - Pure JS</h2>
+        
+        <input type="text" name="user" id="user" />
+        
+        Hello <span id="display"></span>
+        
+        <script type="text/javascript">
+            var user = document.getElementById('user');
+            var display = document.getElementById('display');
+            
+            user.addEventListener('keyup', function() {
+                var userText = user.value;
+                display.innerHTML = userText;
+            });
+        </script>
+    </body>
+</html>

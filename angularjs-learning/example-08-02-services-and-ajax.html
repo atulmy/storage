@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html ng-app="exampleApp">
+    <head>
+        <title>AngularJS - Services and AJAX</title>
+        
+        <script type="text/javascript" src="js/angular.js"></script>
+        <script type="text/javascript" src="js/angular.route.js"></script>
+        <script type="text/javascript">
+            var exampleApp = angular.module('exampleApp', ['ngRoute']);
+            
+            exampleApp.config(function($routeProvider){
+                $routeProvider
+                    .when('/oceans/:id', {
+                        templateUrl: 'templates/oceans.detail.html',
+                        controller: 'earthDetailController'
+                    })
+                    .when('/oceans', {
+                        templateUrl: 'templates/oceans.list.html',
+                        controller: 'earthController'
+                    })
+                    .when('/', {
+                        templateUrl: 'templates/index.html'
+                    });
+            });
+            
+            exampleApp.factory('dataService', function($http) {
+                return {
+                    getOceans: function(callback) {
+                        $http.get('ajax.php?action=list-oceans')
+                            .success(callback)
+                            .error(callback);
+                    }
+                };
+            });
+            
+            exampleApp.controller('earthController', function($scope, dataService) {
+                dataService.getOceans(function(response) {
+                    $scope.oceans = response;
+                });
+            });
+            
+            exampleApp.controller('earthDetailController', function($scope, $routeParams, dataService) {
+                dataService.getOceans(function(response) {
+                    $scope.oceans = response;
+                });
+                $scope.ocean = $scope.oceans[$routeParams.id];
+            });
+        </script>
+    </head>
+    
+    <body>
+        <h2>AngularJS - Services and AJAX</h2>
+        
+        <div ng-controller="earthController">
+            <div ng-view=""></div>
+        </div>
+    </body>
+</html>

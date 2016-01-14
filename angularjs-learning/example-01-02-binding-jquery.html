@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>AngularJS - Data Binding - jQuery</title>
+    </head>
+    
+    <body>
+        <h2>AngularJS - Data Binding - jQuery</h2>
+        
+        <input type="text" name="user" id="user" />
+        
+        Hello <span id="display"></span>
+        
+        <script type="text/javascript" src="js/jquery.js"></script>
+        <script type="text/javascript">
+            var user = $('#user');
+            var display = $('#display');
+            
+            user.on('keyup', function() {
+                var userText = user.val();
+                display.html(userText);
+            });
+        </script>
+    </body>
+</html>

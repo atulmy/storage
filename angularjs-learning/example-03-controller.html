@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html ng-app="exampleApp">
+    <head>
+        <title>AngularJS - Module</title>
+        
+        <script type="text/javascript" src="js/angular.js"></script>
+        <script type="text/javascript">
+            var exampleApp = angular.module('exampleApp', []);
+            
+            exampleApp.controller('earthController', function($scope) {
+                $scope.planet = 'Earth';
+                $scope.radius = 6371;
+            });
+            exampleApp.controller('marsController', function($scope) {
+                $scope.planet = 'Mars';
+                $scope.radius = 3390;
+            });
+        </script>
+    </head>
+    
+    <body>
+        <h2>AngularJS - Controller</h2>
+        
+        <div ng-controller="earthController">
+            <p>Planet: {{ planet }}</p>
+            <p>Radius: {{ radius }} KM</p>
+        </div>
+        
+        <br/>
+        
+        <div ng-controller="marsController">
+            <p>Planet: {{ planet }}</p>
+            <p>Radius: {{ radius }} KM</p>
+        </div>
+    </body>
+</html>

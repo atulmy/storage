@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html ng-app="exampleApp">
+    <head>
+        <title>AngularJS - Filter - Sort</title>
+        
+        <script type="text/javascript" src="js/angular.js"></script>
+        <script type="text/javascript">
+            var exampleApp = angular.module('exampleApp', []);
+            
+            exampleApp.controller('earthController', function($scope) {
+                
+                $scope.oceans = [
+                    {name: 'Pacific Ocean', volume: 50.1, depth: 3970},
+                    {name: 'Atlantic Ocean', volume: 23.3, depth: 3646},
+                    {name: 'Indian Ocean', volume: 19.8, depth: 3741},
+                    {name: 'Southern Ocean', volume: 5.4, depth: 3270},
+                    {name: 'Arctic Ocean', volume: 1.4, depth: 1205}
+                ];
+                
+            });
+        </script>
+    </head>
+    
+    <body>
+        <h2>AngularJS - Filter - Sort</h2>
+        
+        <div ng-controller="earthController">
+            <h3>Oceans</h3>
+            
+            Search <input type="text" name="search" ng-model="search" />
+            <table cellpadding="5">
+                <thead>
+                    <tr>
+                        <th align="left"><a href="javascript:void(0);" ng-click="sort = 'name'">Name</a></th>
+                        <th align="left"><a href="javascript:void(0);" ng-click="sort = 'volume'">Volume</a></th>
+                        <th align="left"><a href="javascript:void(0);" ng-click="sort = 'depth'">Average Depth</a></th>
+                    </tr>
+                </thead>
+                
+                <tbody>
+                    <tr ng-repeat="ocean in oceans | filter:search | orderBy:sort">
+                        <td>{{ ocean.name }}</td>
+                        <td>{{ ocean.volume }}</td>
+                        <td>{{ ocean.depth }}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </body>
+</html>

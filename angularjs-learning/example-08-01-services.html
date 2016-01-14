@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html ng-app="exampleApp">
+    <head>
+        <title>AngularJS - Services</title>
+        
+        <script type="text/javascript" src="js/angular.js"></script>
+        <script type="text/javascript" src="js/angular.route.js"></script>
+        <script type="text/javascript">
+            var exampleApp = angular.module('exampleApp', ['ngRoute']);
+            
+            exampleApp.config(function($routeProvider){
+                $routeProvider
+                    .when('/oceans/:id', {
+                        templateUrl: 'templates/oceans.detail.html',
+                        controller: 'earthDetailController'
+                    })
+                    .when('/oceans', {
+                        templateUrl: 'templates/oceans.list.html',
+                        controller: 'earthController'
+                    })
+                    .when('/', {
+                        templateUrl: 'templates/index.html'
+                    });
+            });
+            
+            exampleApp.factory('dataService', function() {
+                return {
+                    getOceans: function() {
+                        var oceans = [
+                            {name: 'Pacific Ocean', volume: 50.1, depth: 3970},
+                            {name: 'Atlantic Ocean', volume: 23.3, depth: 3646},
+                            {name: 'Indian Ocean', volume: 19.8, depth: 3741},
+                            {name: 'Southern Ocean', volume: 5.4, depth: 3270},
+                            {name: 'Arctic Ocean', volume: 1.4, depth: 1205}
+                        ];
+                        return oceans;
+                    }
+                };
+            });
+            
+            exampleApp.controller('earthController', function($scope, dataService) {
+                $scope.oceans = dataService.getOceans();
+            });
+            
+            exampleApp.controller('earthDetailController', function($scope, $routeParams, dataService) {
+                $scope.oceans = dataService.getOceans();
+                $scope.ocean = $scope.oceans[$routeParams.id];
+            });
+        </script>
+    </head>
+    
+    <body>
+        <h2>AngularJS - Services</h2>
+        
+        <div ng-controller="earthController">
+            <div ng-view=""></div>
+        </div>
+    </body>
+</html>

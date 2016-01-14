@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html ng-app="exampleApp">
+    <head>
+        <title>AngularJS - AJAX - GET</title>
+        
+        <script type="text/javascript" src="js/angular.js"></script>
+        <script type="text/javascript">
+            var exampleApp = angular.module('exampleApp', []);
+            
+            exampleApp.controller('earthController', function($scope, $http) {
+                $scope.continents = [];
+                
+                $http.get('ajax.php?action=list')
+                    .success(function(data) {
+                        $scope.continents = data;
+                    })
+                    .error(function() {
+                       // error logging 
+                    });
+            });
+        </script>
+    </head>
+    
+    <body>
+        <h2>AngularJS - AJAX - GET</h2>
+        
+        <div ng-controller="earthController">
+            <h3>Continents</h3>
+            
+            <ul>
+                <li ng-repeat="continent in continents">
+                    {{ continent }}
+                </li>
+            </ul>
+        </div>
+    </body>
+</html>

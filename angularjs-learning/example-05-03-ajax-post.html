@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html ng-app="exampleApp">
+    <head>
+        <title>AngularJS - AJAX - POST</title>
+        
+        <script type="text/javascript" src="js/angular.js"></script>
+        <script type="text/javascript">
+            var exampleApp = angular.module('exampleApp', []);
+            
+            exampleApp.controller('earthController', function($scope, $http) {
+                
+                $scope.success = false;
+                
+                $http.post('ajax.php?action=update', {id: 1})
+                    .success(function(response) {
+                        $scope.success = response.success;
+                    })
+                    .error(function() {
+                       // error logging 
+                    });
+                
+            });
+        </script>
+    </head>
+    
+    <body>
+        <h2>AngularJS - AJAX - POST</h2>
+        
+        <div ng-controller="earthController">
+            <p>Server Response: {{ success }}</p>
+        </div>
+    </body>
+</html>

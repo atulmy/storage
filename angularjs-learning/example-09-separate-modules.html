@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html ng-app="exampleApp">
+    <head>
+        <title>AngularJS - Creating separate modules</title>
+        
+        <script type="text/javascript" src="js/angular.js"></script>
+        <script type="text/javascript" src="js/angular.route.js"></script>
+        
+        <!-- Modules -->
+        <script type="text/javascript" src="js/app/controllers.js"></script>
+        <script type="text/javascript" src="js/app/services.js"></script>
+        <script type="text/javascript" src="js/app/app.js"></script>
+    </head>
+    
+    <body>
+        <h2>AngularJS - Creating separate modules</h2>
+        
+        <div ng-controller="earthController">
+            <div ng-view=""></div>
+        </div>
+    </body>
+</html>

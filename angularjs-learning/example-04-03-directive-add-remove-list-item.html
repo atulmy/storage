@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html ng-app="exampleApp">
+    <head>
+        <title>AngularJS - Directive - Add / Remove List Item</title>
+        
+        <script type="text/javascript" src="js/angular.js"></script>
+        <script type="text/javascript">
+            var exampleApp = angular.module('exampleApp', []);
+            
+            exampleApp.controller('earthController', function($scope) {
+                $scope.continents = [
+                    'Asia',
+                    'Africa',
+                    'North America',
+                    'South America',
+                    'Antarctica',
+                    'Europe',
+                    'Australia'
+                ];
+                
+                $scope.continentAdd = function() {
+                    $scope.continents.push($scope.continentName); // arrayName.push is native javascript function
+                    $scope.continentName = ''; // clear input box value
+                };
+                
+                $scope.continentDelete = function(index) {
+                    $scope.continents.splice(index, 1);
+                };
+            });
+        </script>
+    </head>
+    
+    <body>
+        <h2>AngularJS - Directive (ng-submit / ng-click)</h2>
+        
+        <div ng-controller="earthController">
+            <h3>Continents</h3>
+            
+            <ul>
+                <li ng-repeat="continent in continents">
+                    {{ continent }} <a href="javascript:void(0);" ng-click="continentDelete($index)">delete</a>
+                </li>
+            </ul>
+            
+            <form ng-submit="continentAdd()">
+                <input type="text" name="continent_name" ng-model="continentName"/>
+                
+                <button type="submit">Submit</button>
+            </form>
+        </div>
+    </body>
+</html>
